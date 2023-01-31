@@ -65,22 +65,7 @@ return require('packer').startup(function(use)
 		end
 	}
 	use 'williamboman/mason-lspconfig.nvim'
-	use {
-		'simrat39/rust-tools.nvim',
-		config = function()
-			local rt = require("rust-tools")
-			rt.setup({
-				server = {
-					on_attach = function(_, bufnr)
-						-- Hover actions
-						vim.keymap.set("n", "<C-,>", rt.hover_actions.hover_actions, { buffer = bufnr })
-						-- Code action groups
-						vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-					end,
-				},
-			})
-		end
-	}
+	use 'simrat39/rust-tools.nvim'
 
 	-- Completion framework:
 	use 'hrsh7th/nvim-cmp'
