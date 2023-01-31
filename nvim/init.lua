@@ -51,10 +51,12 @@ vim.diagnostic.config({
     },
 })
 
-vim.cmd([[
-set signcolumn=yes
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-]])
+vim.api.nvim_create_autocmd({"CursorHold"}, {
+  pattern = { "*" },
+  callback = function()
+    vim.diagnostic.open_float(nil, { focusable = false })
+  end
+})
 
 -- Completion Plugin Setup
 local cmp = require'cmp'
