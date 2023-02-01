@@ -58,7 +58,7 @@ return require('packer').startup(function(use)
 		end
 	}
 	use 'neovim/nvim-lspconfig'
-	use {
+	use { -- TODO: 遅延読み込みでいい
 		'williamboman/mason.nvim',
 		config = function()
 			require("mason").setup()
@@ -68,19 +68,173 @@ return require('packer').startup(function(use)
 	use 'simrat39/rust-tools.nvim'
 
 	-- Completion framework:
-	use 'hrsh7th/nvim-cmp'
+	use "hrsh7th/cmp-nvim-lsp" -- HACK: 本当はInsertEnterで他の依存プラグインと一緒に読み込みたいが、できない(module 'cmp-nvim-lsp' not found)ためstartプラグインとして読み込む
+	use {
+		'hrsh7th/nvim-cmp',
+		module = {"cmp"},
+		requires = {
+			-- LSP completion source:
+			use {'hrsh7th/cmp-nvim-lsp-signature-help', event = {"InsertEnter"}},
 
-	-- LSP completion source:
-	use 'hrsh7th/cmp-nvim-lsp'
+			-- Useful completion sources:
+			use {'hrsh7th/cmp-buffer', event = {"InsertEnter"}},
+			use {'hrsh7th/cmp-path', event = {"InsertEnter"}},
+			use {'hrsh7th/cmp-cmdline', event = {"InsertEnter"}},
+			use {'hrsh7th/cmp-nvim-lua', event = {"InsertEnter"}},
+			use {'hrsh7th/cmp-vsnip', event = {"InsertEnter"}},
+			use {'hrsh7th/vim-vsnip', event = {"InsertEnter"}},
+			use {'hrsh7th/cmp-calc', event = {"InsertEnter"}},
 
-	-- Useful completion sources:
-	use 'hrsh7th/cmp-nvim-lua'
-	use 'hrsh7th/cmp-nvim-lsp-signature-help'
-	use 'hrsh7th/cmp-vsnip'
-	use 'hrsh7th/cmp-path'
-	use 'hrsh7th/cmp-buffer'
-	use 'hrsh7th/vim-vsnip'
-	
-	use 'nvim-treesitter/nvim-treesitter'
+			-- some sources of nvim-cmp 
+			use {
+				'petertriho/cmp-git',
+				requires = "nvim-lua/plenary.nvim"
+			}
+		},
+		config = function()
+			-- 全部readmeからコピペ
+			local cmp = require'cmp'
+			cmp.setup({
+			        snippet = {
+			      	  expand = function(args)
+			      		  vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+			      	  end,
+			        },
+			        window = {
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
+				},
+			        mapping = cmp.mapping.preset.insert({
+					['<C-p>'] = cmp.mapping.select_prev_item(),
+					['<C-n>'] = cmp.mapping.select_next_item(),
+					['<C-Space>'] = cmp.mapping.complete(),
+					['<C-e>'] = cmp.mapping.abort(),
+					['<CR>'] = cmp.mapping.confirm({
+						behavior = cmp.ConfirmBehavior.Insert,
+						select = true,
+					})
+			        }),
+			        sources = cmp.config.sources({
+					{ name = 'path' },
+					{ name = 'nvim_lsp', keyword_length = 2},
+					{ name = 'cmdline', keyword_length = 2},
+					{ name = 'nvim_lsp_signature_help'},
+					{ name = 'nvim_lua', keyword_length = 2},
+					{ name = 'calc'},
+					{ name = 'vsnip' },
+			        }, {
+			      	  { name = 'buffer' },
+			        }),
+				formatting = { -- TODO: menu_iconをいい感じにする
+					fields = {'menu', 'abbr', 'kind'},
+					format = function(entry, item)
+						local menu_icon ={
+							nvim_lsp = 'λ',
+							vsnip = '⋗',
+							buffer = 'Ω',
+							path = '🖫',
+						}
+						item.menu = menu_icon[entry.source.name]
+						return item
+					end,
+				},
+			})
+
+			-- Set configuration for specific filetype.
+			cmp.setup.filetype('gitcommit', {
+			        sources = cmp.config.sources({
+			      	  { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+			        }, {
+			      	  { name = 'buffer' },
+			        })
+			})
+
+			-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+			cmp.setup.cmdline({ '/', '?' }, {
+			        mapping = cmp.mapping.preset.cmdline(),
+			        sources = {
+			      	  { name = 'buffer' }
+			        }
+			})
+
+			-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+			cmp.setup.cmdline(':', {
+			        mapping = cmp.mapping.preset.cmdline(),
+			        sources = cmp.config.sources({
+			      	  { name = 'path' }
+			        }, {
+			      	  { name = 'cmdline', keyword_length = 2 }
+			        })
+			})
+
+			-- Set up lspconfig.
+			local capabilities = require('cmp_nvim_lsp').default_capabilities()
+			require('lspconfig')['phpactor'].setup {
+				capabilities = capabilities
+			}
+			-- TODO: 各lspの設定
+		end
+	}
+
+	use {
+		"phpactor/phpactor",
+		run = "composer install"
+	}
+	use {
+		"gbprod/phpactor.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim", -- required to update phpactor
+			"neovim/nvim-lspconfig", -- required to automaticly register lsp serveur
+		},
+		config = function()
+			require("phpactor").setup({
+				install = {
+					path = vim.fn.stdpath("data") .. "/opt/",
+					branch = "master",
+					bin = "/usr/local/bin/phpactor",
+					php_bin = "php",
+					composer_bin = "composer",
+					git_bin = "git",
+					check_on_startup = "none",
+				},
+				lspconfig = {
+					enabled = true,
+					options = {},
+				},
+
+			})
+		end
+	}
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		config = function()
+			require('nvim-treesitter.configs').setup {
+				ensure_installed = { "lua", "rust", "toml", "php", "javascript", "json", "vue" },
+				auto_install = true,
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting=false,
+				},
+				ident = { enable = true }, 
+				rainbow = {
+					enable = true,
+					extended_mode = true,
+					max_file_lines = nil,
+				}
+			}
+		end
+	}
+	use {
+		"windwp/nvim-autopairs",
+		config = function() require("nvim-autopairs").setup {} end,
+		opt = true,
+		event = {"BufRead", "BufNewFile"},
+	}
+	use {
+		'j-hui/fidget.nvim',
+		config = function()
+			require("fidget").setup {}
+		end
+	}
 end)
 
