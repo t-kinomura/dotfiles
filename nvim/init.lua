@@ -71,5 +71,11 @@ vim.api.nvim_create_autocmd({"CursorHold"}, {
   end
 })
 
+vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
+  pattern = { "*.php" },
+  callback = function()
+	  vim.opt_local.autoindent = true
+	  vim.opt_local.smartindent = true
+  end
 })
 
