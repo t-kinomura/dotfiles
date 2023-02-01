@@ -1,3 +1,4 @@
+require'color'
 require'setting'
 require'keymap'
 require'plugins'
