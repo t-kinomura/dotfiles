@@ -26,3 +26,31 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0 -- 0に設定するとtabstopに従う
 vim.opt.expandtab = noexpand -- tabの入力をspaceに置き換えない
 
+-- diagnostic
+-- LSP Diagnostics Options Setup 
+local sign = function(opts)
+  vim.fn.sign_define(opts.name, {
+    texthl = opts.name,
+    text = opts.text,
+    numhl = ''
+  })
+end
+
+-- sign({name = 'DiagnosticSignError', text = ''})
+-- sign({name = 'DiagnosticSignWarn', text = ''})
+-- sign({name = 'DiagnosticSignHint', text = ''})
+-- sign({name = 'DiagnosticSignInfo', text = ''})
+
+vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    update_in_insert = true,
+    underline = true,
+    severity_sort = false,
+    float = {
+        border = 'rounded',
+        source = 'always',
+        header = '',
+        prefix = '',
+    },
+})

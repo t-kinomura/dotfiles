@@ -3,11 +3,6 @@ require'setting'
 require'keymap'
 require'plugins'
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = { "lua/plugins.lua" },
-  command = "PackerCompile",
-})
-
 local has = function(x) 
   return vim.fn.has(x) == 1
 end
@@ -23,45 +18,14 @@ if is_linux then
   require'linux'
 end
 
-
--- rust tools seting
-local rt = require("rust-tools")
-rt.setup({
-  server = {
-    on_attach = function(_, bufnr)
-      -- Hover actions
-      vim.keymap.set("n", "<leader>,", rt.hover_actions.hover_actions, { buffer = bufnr })
-      -- Code action groups
-      vim.keymap.set("n", "<C-space>", rt.code_action_group.code_action_group, { buffer = bufnr })
-    end,
-  },
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+  pattern = { "plugins.lua" },
+  command = "PackerCompile",
 })
--- LSP Diagnostics Options Setup 
-local sign = function(opts)
-  vim.fn.sign_define(opts.name, {
-    texthl = opts.name,
-    text = opts.text,
-    numhl = ''
-  })
-end
 
-sign({name = 'DiagnosticSignError', text = ''})
-sign({name = 'DiagnosticSignWarn', text = ''})
-sign({name = 'DiagnosticSignHint', text = ''})
-sign({name = 'DiagnosticSignInfo', text = ''})
-
-vim.diagnostic.config({
-    virtual_text = false,
-    signs = true,
-    update_in_insert = true,
-    underline = true,
-    severity_sort = false,
-    float = {
-        border = 'rounded',
-        source = 'always',
-        header = '',
-        prefix = '',
-    },
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+  pattern = { "*.lua" },
+  command = "luafile %",
 })
 
 vim.api.nvim_create_autocmd({"CursorHold"}, {

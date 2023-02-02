@@ -66,7 +66,22 @@ return require('packer').startup(function(use)
 		end
 	}
 	use 'williamboman/mason-lspconfig.nvim'
-	use 'simrat39/rust-tools.nvim'
+	use {
+		'simrat39/rust-tools.nvim',
+		config = function()
+			local rt = require("rust-tools")
+			rt.setup({
+			  server = {
+				on_attach = function(_, bufnr)
+				  -- Hover actions
+				  vim.keymap.set("n", "<leader>,", rt.hover_actions.hover_actions, { buffer = bufnr })
+				  -- Code action groups
+				  vim.keymap.set("n", "<C-space>", rt.code_action_group.code_action_group, { buffer = bufnr })
+				end,
+			  },
+			})
+		end
+	}
 
 	-- Completion framework:
 	use "hrsh7th/cmp-nvim-lsp" -- HACK: 本当はInsertEnterで他の依存プラグインと一緒に読み込みたいが、できない(module 'cmp-nvim-lsp' not found)ためstartプラグインとして読み込む
