@@ -148,7 +148,7 @@ return require('packer').startup(function(use)
 							nvim_lsp = 'λ',
 							vsnip = '⋗',
 							buffer = 'Ω',
-							path = '🖫',
+							path = 'π',
 						}
 						item.menu = menu_icon[entry.source.name]
 						return item
