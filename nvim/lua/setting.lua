@@ -19,3 +19,9 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
 vim.opt.shortmess:append({ c = true })
 vim.opt.updatetime = 300
+
+-- indent
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 0 -- 0に設定するとtabstopに従う
+vim.opt.expandtab = noexpand -- tabの入力をspaceに置き換えない
+
