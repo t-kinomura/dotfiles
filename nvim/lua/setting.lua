@@ -10,6 +10,7 @@ vim.opt.cursorline = true
 vim.opt.ambiwidth = "single"  -- East Asian Ambigous Width関係の設定, neovimだとsingleがいいらしい
 vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
+vim.bo.autoread = true
 
 -- nvim-treeでoffにするのをおすすめされた
 vim.g.loaded_netrw = 1
