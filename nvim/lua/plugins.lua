@@ -28,6 +28,7 @@ return require('packer').startup(function(use)
 			vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 			vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 			vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+			vim.keymap.set('v', '<S-f>', "y<ESC>:Telescope live_grep default_text=<c-r>0<CR>", {}) -- FIXME: 検索語句に空白が含まれてると何故か失敗する
 		end
 	}
 	use {
