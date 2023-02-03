@@ -36,12 +36,17 @@ return require('packer').startup(function(use)
 		requires = {
 			'nvim-tree/nvim-web-devicons', -- optional, for file icons
 		},
-		tag = 'nightly', -- optional, updated every week. (see issue #1193)
+		tag = 'nightly',
 		config = function()
 			require("nvim-tree").setup({
 				sort_by = "case_sensitive",
 				view = {
-					width = 30,
+					-- width = { -- not working why?
+					--   min = 30,
+					--   max = 70,
+					--   padding = 2
+					-- },
+					width = 50,
 					mappings = {
 						list = {
 							{ key = "u", action = "dir_up" },
@@ -59,7 +64,7 @@ return require('packer').startup(function(use)
 		end
 	}
 	use 'neovim/nvim-lspconfig'
-	use { -- TODO: 遅延読み込みでいい
+	use { -- TODO: lazy load
 		'williamboman/mason.nvim',
 		config = function()
 			require("mason").setup()
