@@ -19,7 +19,7 @@ if is_linux then
 end
 
 vim.api.nvim_create_autocmd({"BufWritePost"}, {
-  pattern = { "plugins.lua" },
+  pattern = { "lua/plugins.lua" },
   command = "PackerCompile",
 })
 
