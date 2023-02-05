@@ -209,6 +209,7 @@ return require('packer').startup(function(use)
 				ensure_installed = { "lua", "rust", "toml", "php", "javascript", "json", "vue" },
 				auto_install = true,
 				highlight = {
+					disable = {"php"}, -- インデントが効かなくなるのでオフにする.
 					enable = true,
 					additional_vim_regex_highlighting=false,
 				},
