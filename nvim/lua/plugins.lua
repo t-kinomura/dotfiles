@@ -1,27 +1,5 @@
 vim.cmd.packadd "packer.nvim"
--- external requirements
---
--- packer
--- - (Neovim v0.5.0+)
--- nvim-telescope
--- - ripgrep (see: https://github.com/BurntSushi/ripgrep)
--- - fd (see: https://github.com/sharkdp/fd)
--- nvim-tree
--- - (Neovim v0.8.0+)
--- nvim-treesitter
--- - tar
--- - curl
---
--- langage spcecified
--- rust
--- - :MasonInstall rust-analyzer codelldb
---
--- os specified
--- linux
--- - xclip
---
--- others
--- - https://github.com/mhinz/neovim-remote
+
 return require('packer').startup(function(use)
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.1',
