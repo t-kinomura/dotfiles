@@ -2,7 +2,7 @@ vim.keymap.set("n", "<CR><CR>", "<C-w>w")
 vim.keymap.set("n", "<ESC><ESC>", ":nohlsearch<CR>")
 vim.keymap.set("i", "jk", "<ESC>")
 vim.keymap.set("n", "<leader>t", ":tabnew<CR>")
-vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
+vim.keymap.set("t", "<ESC>", "<C-\\><C-n>:bp<CR>:bw! term*<CR>")
 
 -- lsp
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
