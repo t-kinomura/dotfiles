@@ -18,14 +18,16 @@ if is_linux then
   require'linux'
 end
 
+local configGrp = vim.api.nvim_create_augroup("SaveConfig", { clear = true })
 vim.api.nvim_create_autocmd({"BufWritePost"}, {
   pattern = { "lua/plugins.lua" },
   command = "PackerCompile",
+  group   = configGrp
 })
-
 vim.api.nvim_create_autocmd({"BufWritePost"}, {
   pattern = { "*.lua" },
   command = "luafile %",
+  group   = configGrp
 })
 
 vim.api.nvim_create_autocmd({"CursorHold"}, {
@@ -35,11 +37,24 @@ vim.api.nvim_create_autocmd({"CursorHold"}, {
   end
 })
 
+local phpGrp = vim.api.nvim_create_augroup("PhpIndent", { clear = true })
 vim.api.nvim_create_autocmd({"BufReadPost", "BufNewFile"}, {
   pattern = { "*.php" },
   callback = function()
 	  vim.opt_local.autoindent = true
 	  vim.opt_local.smartindent = true
-  end
+  end,
+  group = phpGrp
 })
 
+local termGrp = vim.api.nvim_create_augroup("Terminal", { clear = true })
+vim.api.nvim_create_autocmd({"BufLeave"}, {
+  pattern = { "term://*" },
+  command = "stopinsert",
+  group   = termGrp
+})
+vim.api.nvim_create_autocmd({"BufEnter", "WinEnter"}, {
+  pattern = { "term://*" },
+  command = "startinsert",
+  group   = termGrp
+})
