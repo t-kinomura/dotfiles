@@ -210,7 +210,7 @@ return require('packer').startup(function(use)
 		run = [[:TSUpdate]],
 		config = function()
 			require('nvim-treesitter.configs').setup {
-				ensure_installed = { "lua", "rust", "toml", "php", "javascript", "jsdoc", "json", "typescript", "vue", "css", "html", "go", "gomod", "gosum", "git_rebase", "gitattributes", "gitcommit", "gitignore", "make", "toml", "yaml", "scss", "solidity" },
+				ensure_installed = { "lua", "rust", "toml", "php", "javascript", "jsdoc", "json", "typescript", "vue", "css", "html", "go", "gomod", "gosum", "git_rebase", "gitattributes", "gitcommit", "make", "toml", "yaml", "scss", "solidity" },
 				auto_install = false,
 				highlight = {
 					disable = {"php"}, -- インデントが効かなくなるのでオフにする.
