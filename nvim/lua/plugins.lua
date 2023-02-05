@@ -1,5 +1,6 @@
 vim.cmd.packadd "packer.nvim"
 -- external requirements
+--
 -- packer
 -- - (Neovim v0.5.0+)
 -- nvim-telescope
@@ -7,9 +8,14 @@ vim.cmd.packadd "packer.nvim"
 -- - fd (see: https://github.com/sharkdp/fd)
 -- nvim-tree
 -- - (Neovim v0.8.0+)
+-- nvim-treesitter
+-- - tar
+-- - curl
+--
 -- langage spcecified
 -- rust
 -- - :MasonInstall rust-analyzer codelldb
+--
 -- os specified
 -- linux
 -- - xclip
