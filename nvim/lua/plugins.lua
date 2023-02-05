@@ -19,6 +19,9 @@ vim.cmd.packadd "packer.nvim"
 -- os specified
 -- linux
 -- - xclip
+--
+-- others
+-- - https://github.com/mhinz/neovim-remote
 return require('packer').startup(function(use)
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.1',
