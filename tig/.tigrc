@@ -1,0 +1,4 @@
+bind main <Ctrl-y> @sh -c "echo %(commit) | pbcopy"
+
+# checkout -b
+bind branch B ?git checkout -b "%(prompt Enter new branch name:)" %(branch)
