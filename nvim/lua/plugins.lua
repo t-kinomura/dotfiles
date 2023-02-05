@@ -202,36 +202,6 @@ return require('packer').startup(function(use)
 			-- TODO: 各lspの設定
 		end
 	}
-
-	use {
-		"phpactor/phpactor",
-		run = "composer install"
-	}
-	use {
-		"gbprod/phpactor.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim", -- required to update phpactor
-			"neovim/nvim-lspconfig", -- required to automaticly register lsp serveur
-		},
-		config = function()
-			require("phpactor").setup({
-				install = {
-					path = vim.fn.stdpath("data") .. "/opt/",
-					branch = "master",
-					bin = "/usr/local/bin/phpactor",
-					php_bin = "php",
-					composer_bin = "composer",
-					git_bin = "git",
-					check_on_startup = "none",
-				},
-				lspconfig = {
-					enabled = true,
-					options = {},
-				},
-
-			})
-		end
-	}
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		config = function()
