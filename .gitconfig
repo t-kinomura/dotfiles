@@ -1,0 +1,16 @@
+[user]
+	name = "Tetsu Kinomura"
+	email = "tetsukinomura@gmail.com"
+[alias]
+	st = status
+	br = branch
+	co = checkout
+	cob = checkout -b
+	ci = commit
+	ca = commit --amend
+	rb = rebase
+	rbi = rebase -i
+	sh = push origin
+	ll = pull
+[core]
+	editor = nvim
