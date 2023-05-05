@@ -174,13 +174,6 @@ return require('packer').startup(function(use)
 			      	  { name = 'cmdline', keyword_length = 2 }
 			        })
 			})
-
-			-- Set up lspconfig.
-			local capabilities = require('cmp_nvim_lsp').default_capabilities()
-			require('lspconfig')['phpactor'].setup {
-				capabilities = capabilities
-			}
-			-- TODO: 各lspの設定
 		end
 	}
 	use {
