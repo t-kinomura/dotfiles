@@ -67,6 +67,7 @@ return require('packer').startup(function(use)
 				cmd = { "typescript-language-server", "--stdio" }
 			}
             require'lspconfig'.gopls.setup {}
+            require'lspconfig'.lua_ls.setup {}
 		end
 	}
 	use { -- TODO: lazy load
