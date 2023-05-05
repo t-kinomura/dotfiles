@@ -58,6 +58,7 @@ return require('packer').startup(function(use)
 				filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
 				cmd = { "typescript-language-server", "--stdio" }
 			}
+            require'lspconfig'.gopls.setup {}
 		end
 	}
 	use { -- TODO: lazy load
