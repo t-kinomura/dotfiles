@@ -49,7 +49,7 @@ alias sz='source ~/.zshrc'
 #####################################################
 # zsh plugins
 #####################################################
-# zinit
+# zinit(package manager for zsh plugins)
 # https://github.com/zdharma-continuum/zinit
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
