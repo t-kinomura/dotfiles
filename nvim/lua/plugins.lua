@@ -50,7 +50,16 @@ return require('packer').startup(function(use)
 			vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>")
 		end
 	}
-	use 'neovim/nvim-lspconfig'
+	use {
+		'neovim/nvim-lspconfig',
+		config = function()
+			require('lspconfig')['tsserver'].setup {
+				on_attach = on_attach,
+				filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+				cmd = { "typescript-language-server", "--stdio" }
+			}
+		end
+	}
 	use { -- TODO: lazy load
 		'williamboman/mason.nvim',
 		config = function()
@@ -58,6 +67,25 @@ return require('packer').startup(function(use)
 		end
 	}
 	use 'williamboman/mason-lspconfig.nvim'
+	use {
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		config = function()
+			local null_ls = require('null-ls')
+			null_ls.setup {
+				sources = {
+					null_ls.builtins.formatting.stylua,
+					null_ls.builtins.diagnostics.eslint.with({
+						prefer_local = "node_modules/.bin",
+					}),
+					null_ls.builtins.formatting.prettier.with({
+						prefer_local = "node_modules/.bin"
+					})
+				},
+				debug = false
+			}
+		end
+	}
 	use {
 		'simrat39/rust-tools.nvim',
 		config = function()
@@ -181,8 +209,11 @@ return require('packer').startup(function(use)
 		run = [[:TSUpdate]],
 		config = function()
 			require('nvim-treesitter.configs').setup {
-				ensure_installed = { "lua", "rust", "toml", "php", "javascript", "jsdoc", "json", "typescript", "vue", "css", "html", "go", "gomod", "gosum", "git_rebase", "gitattributes", "gitcommit", "make", "toml", "yaml", "scss", "solidity" },
+				ensure_installed = { "lua", "rust", "toml", "php", "javascript", "jsdoc", "json", "typescript", "tsx", "vue", "css", "html", "go", "gomod", "gosum", "git_rebase", "gitattributes", "gitcommit", "make", "toml", "yaml", "scss", "solidity" },
 				auto_install = false,
+				auto_tag = {
+					enable = true
+				},
 				highlight = {
 					disable = {"php"}, -- インデントが効かなくなるのでオフにする.
 					enable = true,
@@ -202,6 +233,10 @@ return require('packer').startup(function(use)
 		config = function() require("nvim-autopairs").setup {} end,
 		opt = true,
 		event = {"BufRead", "BufNewFile"},
+	}
+	use {
+		"windwp/nvim-ts-autotag",
+		config = function() require("nvim-ts-autotag").setup {} end,
 	}
 	use {
 		'j-hui/fidget.nvim',
