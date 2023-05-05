@@ -79,3 +79,11 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 ### End of Powerlevel10k's chunk
 
+# completion
+zinit light zsh-users/zsh-autosuggestions
+
+# syntax highlight
+zinit light zdharma/fast-syntax-highlighting
+
+# search command history
+zinit light zdharma/history-search-multi-word
