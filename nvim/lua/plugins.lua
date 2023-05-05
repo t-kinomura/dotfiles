@@ -44,8 +44,16 @@ return require('packer').startup(function(use)
 					group_empty = true,
 				},
 				filters = {
-					dotfiles = true,
+					dotfiles = false,
 				},
+                actions = {
+                    open_file = {
+                        quit_on_open = true,
+                    }
+                },
+                git = {
+                    ignore = false
+                }
 			})
 			vim.keymap.set("n", "<leader>e", ":NvimTreeFocus<CR>")
 		end
