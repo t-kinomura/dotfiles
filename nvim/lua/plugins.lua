@@ -244,5 +244,35 @@ return require('packer').startup(function(use)
 			require("fidget").setup {}
 		end
 	}
+    use {
+        'akinsho/bufferline.nvim',
+        tag = "*",
+        requires = 'nvim-tree/nvim-web-devicons',
+        config = function()
+            -- :h bufferline-configuration
+            require("bufferline").setup {
+                options = {
+                    diagnostics = "nvim_lsp",
+                    offsets = {
+                        {
+                            filetype = "NvimTree",
+                            text = "--- File Explorer ---",
+                            text_align = "center",
+                            separator = false
+                        }
+                    },
+                    separator_style = "thick"
+                },
+                highlights = {
+                    fill = {
+                        bg = {
+                            attribute = "fg",
+                            highlight = "Pmenu"
+                        }
+                    },
+                }
+            }
+        end
+    }
 end)
 
