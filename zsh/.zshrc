@@ -87,3 +87,6 @@ zinit light zdharma/fast-syntax-highlighting
 
 # search command history
 zinit light zdharma/history-search-multi-word
+
+# github support
+zinit light paulirish/git-open
