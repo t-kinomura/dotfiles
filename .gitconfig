@@ -14,3 +14,5 @@
 	ll = pull
 [core]
 	editor = nvim
+[commit]
+	verbose = true
