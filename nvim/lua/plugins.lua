@@ -61,6 +61,7 @@ return require('packer').startup(function(use)
     use {
         'neovim/nvim-lspconfig',
         config = function()
+            -- @see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
             require('lspconfig')['tsserver'].setup {
                 on_attach = on_attach,
                 filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
