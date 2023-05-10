@@ -12,6 +12,9 @@ autoload -U compinit; compinit
 # highlight
 zstyle ':completion:*:default' menu select=2
 
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
 #####################################################
 # commands
 #####################################################
