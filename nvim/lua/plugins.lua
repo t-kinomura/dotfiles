@@ -67,7 +67,13 @@ return require('packer').startup(function(use)
                 filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript" },
                 cmd = { "typescript-language-server", "--stdio" }
             }
-            require 'lspconfig'.gopls.setup {}
+            require 'lspconfig'.gopls.setup {
+                settings = {
+                    gopls = {
+                        gofumpt = true
+                    }
+                }
+            }
             require 'lspconfig'.lua_ls.setup {}
             require 'lspconfig'.terraformls.setup {}
             require 'lspconfig'.marksman.setup {}
