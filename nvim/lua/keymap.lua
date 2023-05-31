@@ -10,6 +10,7 @@ vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+vim.keymap.set('n', 'gm', vim.lsp.buf.incoming_calls, bufopts)
 vim.keymap.set('n', '<C-space>', vim.lsp.buf.code_action)
 vim.keymap.set('n', 'fff', function()
     vim.lsp.buf.format { async = true }
