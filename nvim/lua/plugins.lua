@@ -231,7 +231,7 @@ return require('packer').startup(function(use)
             require('nvim-treesitter.configs').setup {
                 ensure_installed = { "lua", "rust", "toml", "php", "javascript", "jsdoc", "json", "typescript", "tsx",
                     "vue", "css", "html", "go", "gomod", "gosum", "git_rebase", "gitattributes", "gitcommit", "make",
-                    "toml", "yaml", "scss", "solidity" },
+                    "toml", "yaml", "scss", "solidity", "terraform" },
                 auto_install = false,
                 auto_tag = {
                     enable = true
