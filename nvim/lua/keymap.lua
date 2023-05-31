@@ -20,3 +20,4 @@ end, opts)
 -- bufferline
 vim.keymap.set("n", "<C-n>", ":BufferLineCycleNext<CR>")
 vim.keymap.set("n", "<C-p>", ":BufferLineCyclePrev<CR>")
+vim.keymap.set("n", "W", ":bw<CR>")
