@@ -21,13 +21,6 @@ vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
 vim.opt.shortmess:append({ c = true })
 vim.opt.updatetime = 300
 
--- indent
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 0   -- 0に設定するとtabstopに従う
-vim.opt.expandtab = true -- tabの入力をspaceに置き換える
-vim.opt.autoindent = true
-vim.opt.smartindent = true
-
 -- diagnostic
 -- LSP Diagnostics Options Setup
 local sign = function(opts)
