@@ -12,6 +12,7 @@
 	rbi = rebase -i
 	sh = push origin
 	ll = pull
+	me = merge
 [core]
 	editor = nvim
 [commit]
