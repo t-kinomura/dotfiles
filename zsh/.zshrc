@@ -3,6 +3,7 @@
 #####################################################
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(anyenv init -)"
+eval "$(direnv hook zsh)"
 . `brew --prefix`/etc/profile.d/z.sh
 
 #####################################################
