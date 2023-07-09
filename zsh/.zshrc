@@ -5,6 +5,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(anyenv init -)"
 eval "$(direnv hook zsh)"
 . `brew --prefix`/etc/profile.d/z.sh
+export PATH="`python3 -m site --user-base`/bin:$PATH"
 
 #####################################################
 # completion
