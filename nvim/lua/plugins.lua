@@ -78,6 +78,7 @@ return require('packer').startup(function(use)
             require 'lspconfig'.terraformls.setup {}
             require 'lspconfig'.marksman.setup {}
             require 'lspconfig'.sqlls.setup {}
+            require 'lspconfig'.clangd.setup {}
         end
     }
     use { -- TODO: lazy load
