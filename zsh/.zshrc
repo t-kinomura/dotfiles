@@ -1,10 +1,9 @@
 #####################################################
 # paths
 #####################################################
-eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 eval "$(direnv hook zsh)"
-. `brew --prefix`/etc/profile.d/z.sh
 export PATH="`python3 -m site --user-base`/bin:$PATH"
 
 #####################################################
@@ -29,6 +28,7 @@ function mkcd() {
     mkdir -p $1 && cd $1
   fi
 }
+. $HOME/tools/z/z.sh
 
 #####################################################
 # aliases
@@ -95,3 +95,12 @@ zinit light zdharma/history-search-multi-word
 
 # github support
 zinit light paulirish/git-open
+
+#####################################################
+# os specific
+#####################################################
+if [ "$(uname)" "==" "Darwin" ]; then
+	. $(pwd -P)/zsh/macos.zsh
+elif [ "$(uname)" "==" "Linux" ]; then
+	. $(pwd -P)/zsh/linux.zsh
+fi
