@@ -5,6 +5,25 @@ export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
 eval "$(direnv hook zsh)"
 export PATH="`python3 -m site --user-base`/bin:$PATH"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
+export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
+
+# その場しのぎ
+export PATH="$HOME/tools/google-cloud-sdk/bin:$PATH"
+export PATH="$HOME/tools/go-containerregistry_Darwin_arm64:$PATH"
+export PATH="/Users/tetsu.kinomura/Library/Android/sdk/platform-tools:$PATH"
+
+# tool系はここに全部集約したい
+export PATH="$HOME/tools/bin:$PATH"
+
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+#####################################################
+# keymaps
+#####################################################
+bindkey -e
 
 #####################################################
 # completion
@@ -47,9 +66,11 @@ alias -g C='| pbcopy'
 alias tls='tmux ls'
 alias ti='tig'
 alias vim='nvim'
-alias dco='docker-compose'
+alias dco='docker compose'
 alias zz='nvim ~/.zshrc'
 alias sz='source ~/.zshrc'
+alias ssha='ssh -A'
+alias sshconf='nvim ~/.ssh/config'
 
 #####################################################
 # zsh plugins
@@ -100,7 +121,8 @@ zinit light paulirish/git-open
 # os specific
 #####################################################
 if [ "$(uname)" "==" "Darwin" ]; then
-	. $(pwd -P)/zsh/macos.zsh
+	. $HOME/dotfiles/zsh/macos.zsh
 elif [ "$(uname)" "==" "Linux" ]; then
-	. $(pwd -P)/zsh/linux.zsh
+	. $HOME/dotfiles/zsh/linux.zsh
 fi
+
