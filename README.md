@@ -1,3 +1,11 @@
+# Setup
+
+```
+git clone git@github.com:t-kinomura/dotfiles.git ~/dotfiles
+ln -s ~/dotfiles/git ~/.config/git
+ln -s ~/dotfiles/nvim ~/.config/nvim
+```
+
 # Tools
 
 ## Package Managers
