@@ -28,12 +28,11 @@ return require('packer').startup(function(use)
 			require("nvim-tree").setup({
 				sort_by = "case_sensitive",
 				view = {
-					-- width = { -- not working why?
-					--   min = 30,
-					--   max = 70,
-					--   padding = 2
-					-- },
-					width = 50,
+					width = { -- not working why?
+					  min = 30,
+					  max = 70,
+					  padding = 2
+					},
 					mappings = {
 						list = {
 							{ key = "u", action = "dir_up" },
